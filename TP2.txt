@@ -1,0 +1,23 @@
+2.1 Cette suite correspond à un parcours « depth-first search ». 
+
+3.1 Il y a des erreurs possibles dans les méthodes : 
+- getSon : on peut essayer d’accéder à une position qui n’appartient pas au vecteur, si pos <= 0 ou pos >= sons.size
+- setSon : on peut essayer d’accéder à une position qui n’appartient pas au vecteur, si pos <= 0 ou pos >= sons.size
+- removeLastSon : on peut essayer de supprimer un fils alors qu’il n’y en a plus
+
+3.2 On peut signaler l’erreur par une valeur de retour pour : 
+- getSon : renvoyer un pointeur vide.
+
+3.3 On peut toujours signaler une erreur par une exception. 
+
+3.4 J’ai choisi d’utiliser les exceptions car :
+- lors de ce programme, je ne voulais pas que le programme crash (donc pas d’assertion)
+- je ne voulais pas utiliser de retour de valeur car cela impliquait : 
+	- de changer le type de retour de setSon/removeLastSon
+	- pour getSon : l’utilisateur n’a pas forcément conscience que le programme n’a 	pas renvoyé de fils
+
+4.2 On ne peut pas séparer en 2 fichiers Tree.h et Tree.cpp. En effet, lorsque l’on utilise des fonctions génériques, le compilateur crée autant de fonctions qu’il y a d’utilisation de ces fonctions. 
+
+4.3 Comme nous n’avons pas utilisé de valeur de retour pour gérer les erreurs, il n’y a pas besoin de changer la gestion d’erreur. En effet, les throw des exceptions sont tous basés sur des tests sur un indice entier (la position) ou sur le nombre de fils, dont la nature ne change pas en fonction du type du template. 
+
+5.3 Pour la fonction minDepth(), on utilise un parcours BFS. En effet, il suffit de parcourir l’arbre en largeur et de s’arrêter dès que l’on trouve un noeud qui ne possède pas d’enfant. Si on avait parcouru l’arbre en profondeur d’abord, on aurait effectué des calculs inutiles en passant par tous les enfants d’un noeud avant d’arriver à celui qui nous intéresse. 
